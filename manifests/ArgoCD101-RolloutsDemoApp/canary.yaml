@@ -25,6 +25,9 @@ spec:
             requests:
               memory: 32Mi
               cpu: 5m
+  rollbackWindow:
+    revisions: 3            
+  revisionHistoryLimit: 5
   strategy:
     canary:
       canaryService: canary-demo-preview
