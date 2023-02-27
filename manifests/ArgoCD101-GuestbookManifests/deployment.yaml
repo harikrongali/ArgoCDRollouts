@@ -18,3 +18,11 @@ spec:
           name: guestbook-ui
           ports:
             - containerPort: 80
+--------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: integration-test-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
