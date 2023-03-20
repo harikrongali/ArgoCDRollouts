@@ -17,14 +17,13 @@ spec:
       provider:
         job:
           spec:
-          backoffLimit: 1
-          template:
-            spec:
-              containers:
-              - name: test
-                image: ghcr.io/argocon22workshop/rollouts-demo:green
-                command: [echo, "hello"]
-              restartPolicy: Never
+            template:
+              spec:
+                containers:
+                - name: test
+                  image: ghcr.io/argocon22workshop/rollouts-demo:green
+                  command: [echo, "hello"]
+                restartPolicy: Never
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
