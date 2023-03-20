@@ -1,4 +1,32 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  args:
+    - name: 'interval'
+      value: '30s'
+  metrics:
+    - name: success-rate
+      interval: "arg.interval"
+      count: 4
+      # NOTE: prometheus queries return results in the form of a vector.
+      # So it is common to access the index 0 of the returned array to obtain the value
+      successCondition: result[0] >= 0.95
+      failureLimit: 1
+      provider:
+        job:
+          spec:
+          backoffLimit: 1
+          template:
+            spec:
+              containers:
+              - name: test
+                image: ghcr.io/argocon22workshop/rollouts-demo:green
+                command: [echo, "hello"]
+              restartPolicy: Never
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: canary-demo
