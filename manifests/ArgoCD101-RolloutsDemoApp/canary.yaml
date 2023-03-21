@@ -56,6 +56,12 @@ spec:
   revisionHistoryLimit: 5
   strategy:
     canary:
+      canaryMetadata:
+        labels:
+          canary_role: canary
+      stableMetadata:
+        labels:
+          canary_role: stable
       analysis:
         templates:
           - templateName: success-rate
