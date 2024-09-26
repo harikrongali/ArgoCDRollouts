@@ -7,4 +7,5 @@ metadata:
   name: argocd-rbac-cm
 data:
   policy.csv: |
+    p, role:workshop, projects, *, *, allow
     g, workshop, role:workshop
